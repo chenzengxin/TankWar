@@ -3,10 +3,10 @@ using System.Collections;
 
 public class TankMovement : MonoBehaviour
 {
-    private Rigidbody rigidbody;
+	private new Rigidbody rigidbody;
     private Vector3 direction;
     private float speed = 10;
-    private float angularspeed = 10;
+    private float angularspeed = 5;
 
 
 

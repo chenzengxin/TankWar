@@ -2,9 +2,9 @@
 using System.Collections;
 
 public class TankData : MonoBehaviour {
-    private int hp=100;
+    private float hp=100;
 
-    public int HP
+    public float HP
     {
         get
         {
@@ -30,13 +30,20 @@ public class TankData : MonoBehaviour {
 	}
 
 
-    public void TakeDamage(int damage=0) {
+    public void TakeDamage(float damage) {
         if (hp < 0)
             return;
         else
         {
-            if(damage==0)
-                this.hp -= Random.Range(10,20);
+            this.hp -= damage;
+            if (hp <= 0)
+            {
+                GameObject go=GameObject.Instantiate(ResourcesManager.Instance.GetGameObject("TankExplosion"),this.transform.position,this.transform.rotation) as GameObject;
+				GameController.Instance.isPlaying = false;
+                Destroy(go,3);
+				Destroy(this.gameObject);
+
+            }
         }
     }
 }

@@ -7,8 +7,9 @@ public enum ShellState {
 }
 public class ShellController : MonoBehaviour {
     private float speed=20;
-    private Rigidbody rigidbody;
+	private new Rigidbody rigidbody;
     public GameObject shellExplosion;
+    public float damage;
     public float Speed
     {
         get
@@ -21,7 +22,6 @@ public class ShellController : MonoBehaviour {
             speed = value;
         }
     }
-
     // Use this for initialization
     void Awake () {
         rigidbody = GetComponent<Rigidbody>();
@@ -29,6 +29,7 @@ public class ShellController : MonoBehaviour {
 
     void Start() {
         this.rigidbody.velocity = this.transform.forward*Speed;
+        damage = (this.transform.localScale.x)*10;
     }
 	// Update is called once per frame
 	void Update () {
@@ -38,7 +39,11 @@ public class ShellController : MonoBehaviour {
 
     public void OnTriggerEnter(Collider collider) {
         ShowExplosion();
-        
+        if (collider.tag == "Player")
+        {
+            collider.SendMessage("TakeDamage",damage);
+        }
+        Debug.Log(collider.tag);
     }
 
     public void ShowExplosion() {
