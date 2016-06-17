@@ -11,7 +11,22 @@ public class TankAttack : MonoBehaviour {
     public GameObject shellPrefabBig;
     public GameObject shellPrefabNormal;
     private GameObject attackShell;
-	void Awake () {
+    private float fileSpeed=20;
+
+    public float FileSpeed
+    {
+        get
+        {
+            return fileSpeed;
+        }
+
+        set
+        {
+            fileSpeed = value;
+        }
+    }
+
+    void Awake () {
         firePosition = this.gameObject.transform.Find("FirePosition");
         shellPrefabNormal = Resources.Load<GameObject>("Prefabs/NormalShell");
         shellPrefabBig = Resources.Load<GameObject>("Prefabs/BigShell");
@@ -24,8 +39,12 @@ public class TankAttack : MonoBehaviour {
     public void SetBigShell() {
         this.attackShell = shellPrefabBig;
     }
+    public void SetNormalShell() {
+        this.attackShell = shellPrefabNormal;
+    }
     public void Fire() {
-        GameObject go=GameObject.Instantiate(shellPrefabNormal, firePosition.position, firePosition.rotation) as GameObject;
+        GameObject go=GameObject.Instantiate(attackShell, firePosition.position, firePosition.rotation) as GameObject;
         go.transform.parent = this.gameObject.transform;
+        go.GetComponent<ShellController>().Speed = fileSpeed;
     }
 }

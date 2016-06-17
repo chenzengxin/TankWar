@@ -9,21 +9,21 @@ public class ResourcesManager : MonoBehaviour {
     {
         get
         {
+            if (!instance)
+            {
+                instance = FindObjectOfType(typeof(ResourcesManager)) as ResourcesManager;
+                if (!instance)
+                {
+                    GameObject go = new GameObject("ResourcesManager");
+                    instance=go.AddComponent<ResourcesManager>();
+                    DontDestroyOnLoad(instance);
+                }
+            }
             return instance;
         }
     }
-    // Use this for initialization
-    void Awake () {
-        if (instance!=this)
-            instance = this;
-    }
-	// Update is called once per frame
-	void Update () {
-
-	}
     public GameObject GetGameObject(string name) {
         GameObject go=Resources.Load<GameObject>("Prefabs/"+name);
-        //Debug.Log(go);
         return go;
     }
 

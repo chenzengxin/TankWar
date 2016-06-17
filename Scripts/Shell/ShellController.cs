@@ -2,9 +2,7 @@
 using System.Collections;
 
 
-public enum ShellState {
-    Default,Large,Crazy
-}
+
 public class ShellController : MonoBehaviour {
     private float speed=20;
 	private new Rigidbody rigidbody;
@@ -29,12 +27,7 @@ public class ShellController : MonoBehaviour {
 
     void Start() {
         this.rigidbody.velocity = this.transform.forward*Speed;
-        damage = (this.transform.localScale.x)*10;
     }
-	// Update is called once per frame
-	void Update () {
-	    
-	}
 
 
     public void OnTriggerEnter(Collider collider) {

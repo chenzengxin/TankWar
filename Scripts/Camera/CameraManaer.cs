@@ -3,18 +3,19 @@ using System.Collections;
 
 public class CameraManaer : MonoBehaviour
 {
-    private GameObject[] targets;
-    private Vector3 dir;
+    public GameObject[] targets;
+    public Vector3 dir;
     private new Camera camera;
     // Use this for initialization
     void Start()
     {
 		this.Init ();
     }
-	void Init(){
+	public void Init(){
 		targets = GameObject.FindGameObjectsWithTag("Player");
 		//Debug.Log(targets[1]);
 		camera = GetComponent<Camera>();
+        
 		dir = this.transform.position - (targets[1].transform.position + targets[0].transform.position) / 2;
 	}
 
